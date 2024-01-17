@@ -1,31 +1,22 @@
 import express from "express";
+import cors from "cors";
+import config from "./config.js";
+import usersRoutes from "./routes/users.routes.js";
 
 const app = express();
 
+app.use(cors());
+app.set("port", config.port || 3000);
+
 app.get("/", (req, res) => {
-  res.send("API is running");
+  res.send("API is running on port " + app.get("port"));
 });
 
-app.get("/users", (req, res) => {
-  res.send("Obteniendo usuarios");
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/users/:id", (req, res) => {
-  res.send(`Obteniendo usuario ${req.params.id}`);
-});
+app.use(usersRoutes);
 
-app.post("/users", (req, res) => {
-  res.send("Creando usuario");
-});
-
-app.put("/users/:id", (req, res) => {
-  res.send(`Actualizando usuario ${req.params.id}`);
-});
-
-app.delete("/users/:id", (req, res) => {
-  res.send(`Eliminando usuario ${req.params.id}`);
-});
-
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+app.listen(app.get("port"), () => {
+  console.log("Server running on port " + app.get("port"));
 });
