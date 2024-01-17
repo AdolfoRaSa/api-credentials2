@@ -9,7 +9,12 @@ app.use(cors());
 app.set("port", config.port || 3000);
 
 app.get("/", (req, res) => {
-  res.send("API is running on port " + app.get("port"));
+  const body = "testdata";
+
+  res.append("Content-Type", "application/json");
+  res.append("Access-Control-Allow-Origin", "*");
+  res.append("connection", "keep-alive");
+  res.status(200).send(body);
 });
 
 app.use(express.json());
