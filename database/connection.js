@@ -5,7 +5,7 @@ const dbSettings = {
   user: "adramirezsa",
   password: "gHvc$3.Sr!",
   server: "SCC-ISSEG",
-  database: "Pruebas",
+  database: "sgc",
   options: {
     encrypt: true,
     trustServerCertificate: true,
