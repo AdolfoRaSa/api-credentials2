@@ -50,6 +50,19 @@ export const getProcessById = async (req, res) => {
     .request()
     .input("process_id", sql.VarChar, process_id)
     .query(queries.getProcessById);
+
+  res.json(result.recordset[0]);
+};
+
+export const getLeaderByProcessId = async (req, res) => {
+  const { process_id } = req.params;
+
+  const pool = await getConnection();
+  const result = await pool
+    .request()
+    .input("process_id", sql.VarChar, process_id)
+    .query(queries.getLeaderByProcessId);
+
   res.json(result.recordset[0]);
 };
 
